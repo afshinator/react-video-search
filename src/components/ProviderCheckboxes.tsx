@@ -5,7 +5,6 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
 
-
 const GreenCheckbox = withStyles({
   root: {
     color: green[400],
@@ -16,7 +15,31 @@ const GreenCheckbox = withStyles({
   checked: {},
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
-export default function ProviderCheckboxes() {
+const Red1Checkbox = withStyles({
+  root: {
+    color: "#f93943",
+    "&$checked": {
+      color: "#f93943",
+    },
+  },
+  checked: {},
+})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+
+const UranianCheckbox = withStyles({
+  root: {
+    color: "#a2d6f9",
+    "&$checked": {
+      color: "#a2d6f9",
+    },
+  },
+  checked: {},
+})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+
+type Props = {
+  setChecked: (newState: object) => void;
+};
+
+export default function ProviderCheckboxes({ setChecked }: Props) {
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
@@ -24,14 +47,16 @@ export default function ProviderCheckboxes() {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    const newState = { ...state, [event.target.name]: event.target.checked };
+    setState(newState);
+    setChecked(newState);
   };
 
   return (
     <FormGroup row>
       <FormControlLabel
         control={
-          <Checkbox
+          <UranianCheckbox
             checked={state.checkedA}
             onChange={handleChange}
             name="checkedA"
@@ -41,7 +66,7 @@ export default function ProviderCheckboxes() {
       />
       <FormControlLabel
         control={
-          <Checkbox
+          <UranianCheckbox
             checked={state.checkedB}
             onChange={handleChange}
             name="checkedB"
@@ -52,7 +77,7 @@ export default function ProviderCheckboxes() {
       />
       <FormControlLabel
         control={
-          <GreenCheckbox
+          <UranianCheckbox
             checked={state.checkedC}
             onChange={handleChange}
             name="checkedC"

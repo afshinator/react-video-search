@@ -1,7 +1,7 @@
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import "./App.css";
-import Dashboard from "./components/Dashboard";
+import AppFrame from "./components/AppFrame";
 import ErrorFallback from "./components/AppErrorFallback";
 
 // TODO: I think I want to move the error-boundary to enclose the main
@@ -14,7 +14,7 @@ const myErrHandler = (error: Error, info: { componentStack: String }) => {
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={myErrHandler}>
-      <Dashboard />
+      <AppFrame />
     </ErrorBoundary>
   );
 }

@@ -3,10 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Placeholder from "./Placeholder";
 import AppDrawer from "./AppDrawer";
 import AppHeader from "./AppHeader";
-import InputScreen from "./InputScreen";
+import MainContent from './MainContent';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,12 +13,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+
+export default function AppFrame() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  const theme = React.useMemo(   // TODO: is this really necessary?
+  const theme = React.useMemo(
     () =>   
       createMuiTheme({
         palette: {
@@ -28,7 +28,7 @@ export default function Dashboard() {
       }),
     [prefersDarkMode]
   );
-  const handleDrawerOpen = () => {  // TODO: do I need to memoize?
+  const handleDrawerOpen = () => {  // TODO: when app is more fleshed out see if I get too many unnecessary renders
     setOpen(true);
   };
   const handleDrawerClose = () => {
@@ -41,7 +41,7 @@ export default function Dashboard() {
         <CssBaseline />
         <AppHeader open={open} handleDrawerOpen={handleDrawerOpen} />
         <AppDrawer open={open} handleDrawerClose={handleDrawerClose} />
-        <InputScreen />
+        <MainContent />
       </div>
     </ThemeProvider>
   );

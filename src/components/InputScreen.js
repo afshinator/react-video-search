@@ -16,6 +16,7 @@ import Orders from "./Orders";
 import SearchInput from "./SearchInput";
 import ProviderCheckboxes from "./ProviderCheckboxes";
 
+
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     height: 60, padding: 5 }
 }));
 
-export default function InputScreen() {
+export default function InputScreen({checked, setChecked}) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
 
@@ -55,7 +56,7 @@ export default function InputScreen() {
           <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Title>Choose Video Providers</Title>
-              <ProviderCheckboxes />
+              <ProviderCheckboxes setChecked={setChecked} />
             </Paper>
           </Grid>
           <Grid item xs={12}>
