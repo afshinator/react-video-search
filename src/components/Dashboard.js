@@ -6,6 +6,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Placeholder from "./Placeholder";
 import AppDrawer from "./AppDrawer";
 import AppHeader from "./AppHeader";
+import InputScreen from "./InputScreen";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ export default function Dashboard() {
         <CssBaseline />
         <AppHeader open={open} handleDrawerOpen={handleDrawerOpen} />
         <AppDrawer open={open} handleDrawerClose={handleDrawerClose} />
-        <Placeholder />
+        <InputScreen />
       </div>
     </ThemeProvider>
   );

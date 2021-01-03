@@ -1,22 +1,21 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
+import { fade, makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
+import InputBase from "@material-ui/core/InputBase";
 import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
+import SearchInput from "./SearchInput";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   display: "flex",
-  // },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
@@ -42,14 +41,11 @@ const useStyles = makeStyles((theme) => ({
   menuButtonHidden: {
     display: "none",
   },
-  title: {
-    flexGrow: 1,
-  },
 }));
 
 export default function Dashboard(props) {
   const classes = useStyles();
-  const { open, handleDrawerOpen } = props
+  const { open, handleDrawerOpen } = props;
 
   return (
     <AppBar
@@ -66,15 +62,10 @@ export default function Dashboard(props) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          className={classes.title}
-        >
+        <Typography component="h1" variant="h6" color="inherit" noWrap>
           Video Search
         </Typography>
+        <SearchInput />
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon />
