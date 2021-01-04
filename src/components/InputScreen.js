@@ -45,7 +45,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InputScreen({ checked, setChecked }) {
+export default function InputScreen({
+  checked,
+  setChecked,
+  handleSubmitSearch,
+}) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
 
@@ -61,7 +65,7 @@ export default function InputScreen({ checked, setChecked }) {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <SearchInput />
+            <SearchInput handleSubmitSearch={handleSubmitSearch} />
           </Grid>
 
           <Grid item xs={12} md={4} lg={3}>

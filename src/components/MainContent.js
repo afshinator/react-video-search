@@ -17,6 +17,17 @@ export default function MainContent() {
     checked.current = newState;
   };
   
+
+  const handleSubmitSearch = (newSearchString) => {
+    console.log('got ', newSearchString )
+    // dispatch({ type: "setQuery", data: newSearchString });
+  };
+
   console.log("MainContent ", checked.current);
-  return <InputScreen checked={checked.current} setChecked={setChecked} />;
+  return <InputScreen 
+  checked={checked.current} 
+  setChecked={setChecked} 
+  handleSubmitSearch={handleSubmitSearch}
+
+  />;
 }

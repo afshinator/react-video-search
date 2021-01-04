@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SearchInput(props) {
+export default function SearchInput({handleSubmitSearch}) {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = React.useState("");
   const theme = useTheme();
@@ -41,6 +41,7 @@ export default function SearchInput(props) {
   function handleSubmit(e) {
     e.preventDefault();
     console.log("DO IT");
+    handleSubmitSearch(searchTerm)
     // onSubmit(searchTerm);
   }
 
