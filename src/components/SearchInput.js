@@ -40,9 +40,7 @@ export default function SearchInput({handleSubmitSearch}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("DO IT");
     handleSubmitSearch(searchTerm)
-    // onSubmit(searchTerm);
   }
 
   return (

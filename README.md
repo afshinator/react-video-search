@@ -27,3 +27,6 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 https://github.com/recharts/recharts/issues/2360
 
+
+* I added a lot of packages thoughtlessly to dependencies insted of devDependencies.  Fix later.
+

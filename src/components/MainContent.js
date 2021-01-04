@@ -1,5 +1,8 @@
 import React from "react";
+import { reducer } from "../helpers/reducer";
 import InputScreen from "./InputScreen";
+import fetchVideos from './../helpers/fetcher';
+
 
 export default function MainContent() {
   //  Holding the state of the checkboxes both as local
@@ -16,18 +19,38 @@ export default function MainContent() {
   const setChecked = (newState) => {
     checked.current = newState;
   };
-  
 
+  // This gets prop-drilled to <SearchInput />
   const handleSubmitSearch = (newSearchString) => {
-    console.log('got ', newSearchString )
-    // dispatch({ type: "setQuery", data: newSearchString });
+    console.log("got ", newSearchString);
+    dispatch({ type: "setQuery", data: newSearchString });
   };
 
-  console.log("MainContent ", checked.current);
-  return <InputScreen 
-  checked={checked.current} 
-  setChecked={setChecked} 
-  handleSubmitSearch={handleSubmitSearch}
+  const initialState = {
+    inputVal: "",
+    currentSearch: null,
+    searches: [
+      // new searches will be stored here; in the shape of resultsObj
+    ],
+  };
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const current = state.searches[state.currentSearch] || null;
 
-  />;
+  React.useEffect(() => {
+    if (typeof state.currentSearch === "number") {
+      // only kick off api requests if we have no searches have been done yet
+      if (state.searches[state.currentSearch].searchTotal === 0) {
+        fetchVideos(state.searches[state.currentSearch].queryString, dispatch);
+      }
+    }
+  }, [state.searches, state.currentSearch]); // TODO
+
+  console.log("MainContent ", checked.current, state);
+  return (
+    <InputScreen
+      checked={checked.current}
+      setChecked={setChecked}
+      handleSubmitSearch={handleSubmitSearch}
+    />
+  );
 }
