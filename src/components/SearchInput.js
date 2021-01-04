@@ -44,8 +44,6 @@ export default function SearchInput(props) {
     // onSubmit(searchTerm);
   }
 
-console.log('theme ', theme)
-
   return (
     <form
       noValidate
