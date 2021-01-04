@@ -6,8 +6,9 @@ Fun little browser app using
 - and soon converted to TypeScript
 
 
-==> To get it running, you need to supply your own credentials.   Right now I'm using RapidAPI and Vimeo itself.  Your credentials.js file needs to hold your secrets: 
+==> To get it running, you need to supply your own credentials.   At this point I'm using RapidAPI to get YouTube and Bing information, and the Vimeo API itself.  Your credentials.js file needs to hold your secrets: 
 
+```javascript
 const creds = {
   youtube: "...",
   bing: "...",
@@ -17,6 +18,7 @@ const creds = {
     clientSecret: "...",
   }
 };
+```
 
 --- 
 
