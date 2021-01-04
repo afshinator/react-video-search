@@ -24,6 +24,12 @@ export default function AppFrame() {
       createMuiTheme({
         palette: {
           type: prefersDarkMode ? "dark" : "light",
+          primary: {
+            main: "#c08552",
+          },
+          secondary: {
+            main: "#8ac6d0",
+          },
         },
       }),
     [prefersDarkMode]

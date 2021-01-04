@@ -16,7 +16,6 @@ import Orders from "./Orders";
 import SearchInput from "./SearchInput";
 import ProviderCheckboxes from "./ProviderCheckboxes";
 
-
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -37,14 +36,16 @@ const useStyles = makeStyles((theme) => ({
   height240: {
     height: 240,
   },
-  searchbox: { 
+  searchbox: {
     display: "flex",
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 60, padding: 5 }
+    justifyContent: "center",
+    alignItems: "center",
+    height: 60,
+    // padding: 5,
+  },
 }));
 
-export default function InputScreen({checked, setChecked}) {
+export default function InputScreen({ checked, setChecked }) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
 
@@ -60,15 +61,11 @@ export default function InputScreen({checked, setChecked}) {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <Paper className={classes.searchbox}>
-              <SearchInput />
-            </Paper>
+            <SearchInput />
           </Grid>
 
           <Grid item xs={12} md={4} lg={3}>
-            <Paper className={fixedHeightPaper}>
-
-            </Paper>
+            <Paper className={fixedHeightPaper}></Paper>
           </Grid>
 
           <Grid item xs={12}>
