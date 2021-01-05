@@ -66,7 +66,10 @@ export default function InputScreen({
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <SearchInput handleSubmitSearch={handleSubmitSearch} />
+            <SearchInput
+              handleSubmitSearch={handleSubmitSearch}
+              current={current}
+            />
           </Grid>
 
           <Grid item xs={12} md={4} lg={3}>

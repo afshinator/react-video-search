@@ -1,7 +1,6 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-
 import Card from "@material-ui/core/Card";
 
 import Switch from "@material-ui/core/Switch";
@@ -25,12 +24,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     height: "120px",
-    // width: '100px',
+    width: '115px',
     padding: "10px",
   },
   img: {
     width: "60px",
     opacity: ".85",
+    transition: 'all .5s',
   },
   offset: {
     marginTop: "-20px",
@@ -89,7 +89,7 @@ export default function ProviderCheckboxes({ setChecked, current }: Props) {
             <span>YouTube</span>{" "}
           </>
         )}
-      </Card>
+      </Card >
       <Card className={classes.card}>
         <img
           src={bing}

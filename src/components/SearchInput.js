@@ -34,10 +34,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SearchInput({handleSubmitSearch}) {
+export default function SearchInput({handleSubmitSearch, current}) {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = React.useState("");
   const theme = useTheme();
+
+  const pending = current && ( current.youTube.status === "pending"
+                || current.vimeo.status === 'pending'
+                || current.bing.status === 'pending')
+
+
   //  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   function handleChange(e) {
     setSearchTerm(e.target.value);
@@ -48,6 +54,8 @@ export default function SearchInput({handleSubmitSearch}) {
     handleSubmitSearch(searchTerm)
   }
 
+
+
   return (
     <form
       noValidate
@@ -56,6 +64,7 @@ export default function SearchInput({handleSubmitSearch}) {
       onSubmit={handleSubmit}
     >
       <TextField
+        disabled={pending}
         className={classes.searchInput}
         id="search-input"
         label="Enter your search term"
