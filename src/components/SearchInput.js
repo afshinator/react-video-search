@@ -19,9 +19,14 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     padding: 6,
+    '& .MuiInputBase-root': {
+      fontSize: 22,
+    },
   },
+
   searchInput: {
     flex: 1,
+    fontSize: 22
   },
   searchIcon: {
     marginRight: 10,
