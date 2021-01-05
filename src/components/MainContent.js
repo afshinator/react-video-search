@@ -1,8 +1,7 @@
 import React from "react";
 import { reducer } from "../helpers/reducer";
 import InputScreen from "./InputScreen";
-import fetchVideos from './../helpers/fetcher';
-
+import fetchVideos from "./../helpers/fetcher";
 
 export default function MainContent() {
   //  Holding the state of the checkboxes both as local
@@ -40,7 +39,9 @@ export default function MainContent() {
     if (typeof state.currentSearch === "number") {
       // only kick off api requests if we have no searches have been done yet
       if (state.searches[state.currentSearch].searchTotal === 0) {
-        fetchVideos(state.searches[state.currentSearch].queryString, dispatch);
+        fetchVideos(state.searches[state.currentSearch].queryString, 
+          dispatch,
+          checked.current);
       }
     }
   }, [state.searches, state.currentSearch]); // TODO
@@ -51,7 +52,7 @@ export default function MainContent() {
       checked={checked.current}
       setChecked={setChecked}
       handleSubmitSearch={handleSubmitSearch}
-      current={current}
+      state={state}
     />
   );
 }

@@ -26,6 +26,14 @@ export function reducer(state, action) {
     current[vendor].stats.resolved = resolved
   }
 
+  // const onAllResolved = () => {
+  //   if ( current.youTube.status=== 'resolved'
+  //   && current.bing.status === 'resolved' 
+  //   && current.vimeo.status === 'resolved' ) {
+  //     current.requestStarted = 
+  //   }
+  // }
+
   switch (action.type) {
     case "inputValChange":
       newState["inputVal"] = action.data;
@@ -64,6 +72,9 @@ export function reducer(state, action) {
       current.searchTotal++
       return newState;
 
+    case 'skip':
+      current[action.data].status="skip"
+      return newState;
 
     case "setYouTube":
       set('youTube', 'resolved', true)

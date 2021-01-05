@@ -49,10 +49,11 @@ export default function InputScreen({
   checked,
   setChecked,
   handleSubmitSearch,
-  current,
+  state,
 }) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
+  const current = state.searches[state.currentSearch] || null;
 
   return (
     <main className={classes.content}>
@@ -78,7 +79,7 @@ export default function InputScreen({
 
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Orders />
+              <Orders state={state}/>
             </Paper>
           </Grid>
         </Grid>

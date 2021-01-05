@@ -62,7 +62,7 @@ export default function ProviderCheckboxes({ setChecked, current }: Props) {
     setChecked(newState);
   };
   const classes = useStyles();
-  console.log("current ", current);
+
   return (
     <div className={classes.container}>
       <Card className={classes.card}>

@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchInput({handleSubmitSearch, current}) {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = React.useState("");
-  const theme = useTheme();
 
   const pending = current && ( current.youTube.status === "pending"
                 || current.vimeo.status === 'pending'
@@ -53,8 +52,6 @@ export default function SearchInput({handleSubmitSearch, current}) {
     e.preventDefault();
     handleSubmitSearch(searchTerm)
   }
-
-
 
   return (
     <form
