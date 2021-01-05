@@ -1,7 +1,7 @@
 # Video Search
 
 Fun little browser app using 
-- React JS, hooks
+- React JS (CRA generated) with hooks, no state libs.
 - Chakra UI
 - and soon converted to TypeScript
 

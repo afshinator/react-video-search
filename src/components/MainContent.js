@@ -51,6 +51,7 @@ export default function MainContent() {
       checked={checked.current}
       setChecked={setChecked}
       handleSubmitSearch={handleSubmitSearch}
+      current={current}
     />
   );
 }

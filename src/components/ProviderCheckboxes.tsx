@@ -1,45 +1,52 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { green } from "@material-ui/core/colors";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
 
-const GreenCheckbox = withStyles({
-  root: {
-    color: green[400],
-    "&$checked": {
-      color: green[600],
-    },
-  },
-  checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+import Card from "@material-ui/core/Card";
 
-const Red1Checkbox = withStyles({
-  root: {
-    color: "#f93943",
-    "&$checked": {
-      color: "#f93943",
-    },
-  },
-  checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+import Switch from "@material-ui/core/Switch";
+import youtube from "../assets/youtube.svg";
+import bing from "../assets/bing.svg";
+import vimeo from "../assets/vimeo.svg";
+import { CircularProgress } from "@material-ui/core";
 
-const UranianCheckbox = withStyles({
-  root: {
-    color: "#a2d6f9",
-    "&$checked": {
-      color: "#a2d6f9",
-    },
+const useStyles = makeStyles((theme) => ({
+  container: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
-  checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    height: "120px",
+    // width: '100px',
+    padding: "10px",
+  },
+  img: {
+    width: "60px",
+    opacity: ".85",
+  },
+  offset: {
+    marginTop: "-20px",
+  },
+  grayscale: {
+    filter: "grayscale(100%)",
+  },
+}));
 
 type Props = {
   setChecked: (newState: object) => void;
+  current: null | {
+    youTube: { status: string };
+    bing: { status: string };
+    vimeo: { status: string };
+  };
 };
 
-export default function ProviderCheckboxes({ setChecked }: Props) {
+export default function ProviderCheckboxes({ setChecked, current }: Props) {
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
@@ -51,40 +58,85 @@ export default function ProviderCheckboxes({ setChecked }: Props) {
     setState(newState);
     setChecked(newState);
   };
-
+  const classes = useStyles();
+  console.log("current ", current);
   return (
-    <FormGroup row>
-      <FormControlLabel
-        control={
-          <UranianCheckbox
-            checked={state.checkedA}
-            onChange={handleChange}
-            name="checkedA"
-          />
-        }
-        label="YouTube"
-      />
-      <FormControlLabel
-        control={
-          <UranianCheckbox
-            checked={state.checkedB}
-            onChange={handleChange}
-            name="checkedB"
-            color="primary"
-          />
-        }
-        label="Bing"
-      />
-      <FormControlLabel
-        control={
-          <UranianCheckbox
-            checked={state.checkedC}
-            onChange={handleChange}
-            name="checkedC"
-          />
-        }
-        label="Vimeo"
-      />
-    </FormGroup>
+    <div className={classes.container}>
+      <Card className={classes.card}>
+        <img
+          src={youtube}
+          className={classes.img}
+          alt="youtube"
+          style={{
+            filter: `grayscale(${state.checkedA ? 0 : 100}%)`,
+          }}
+        />
+        {current && state.checkedA && current.youTube.status === "pending" ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <Switch
+              className={classes.offset}
+              checked={state.checkedA}
+              onChange={handleChange}
+              color="primary"
+              name="checkedA"
+              inputProps={{ "aria-label": "YouTube" }}
+            />
+            <span>YouTube</span>{" "}
+          </>
+        )}
+      </Card>
+      <Card className={classes.card}>
+        <img
+          src={bing}
+          className={classes.img}
+          alt="bing"
+          style={{
+            filter: `grayscale(${state.checkedB ? 0 : 100}%)`,
+          }}
+        />
+        {current && state.checkedB && current.bing.status === "pending" ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <Switch
+              className={classes.offset}
+              checked={state.checkedB}
+              onChange={handleChange}
+              color="primary"
+              name="checkedB"
+              inputProps={{ "aria-label": "Bing" }}
+            />
+            <span>Bing</span>
+          </>
+        )}
+      </Card>
+      <Card className={classes.card}>
+        <img
+          src={vimeo}
+          className={classes.img}
+          alt="vimeo"
+          style={{
+            filter: `grayscale(${state.checkedC ? 0 : 100}%)`,
+          }}
+        />
+        {current && state.checkedC && current.vimeo.status === "pending" ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <Switch
+              className={classes.offset}
+              checked={state.checkedC}
+              onChange={handleChange}
+              color="primary"
+              name="checkedC"
+              inputProps={{ "aria-label": "Vimeo" }}
+            />
+            <span>Vimeo</span>{" "}
+          </>
+        )}
+      </Card>
+    </div>
   );
 }

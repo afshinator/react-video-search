@@ -49,6 +49,7 @@ export default function InputScreen({
   checked,
   setChecked,
   handleSubmitSearch,
+  current,
 }) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
@@ -61,7 +62,7 @@ export default function InputScreen({
           <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Title>Choose Video Providers</Title>
-              <ProviderCheckboxes setChecked={setChecked} />
+              <ProviderCheckboxes setChecked={setChecked} current={current} />
             </Paper>
           </Grid>
           <Grid item xs={12}>
