@@ -5,7 +5,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import AppDrawer from "./AppDrawer";
 import AppHeader from "./AppHeader";
-import MainContent from './MainContent';
+import MainContent from "./MainContent";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,14 +14,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function AppFrame() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
-    () =>   
+    () =>
       createMuiTheme({
         palette: {
           type: prefersDarkMode ? "dark" : "light",
@@ -34,7 +34,8 @@ export default function AppFrame() {
       }),
     [prefersDarkMode]
   );
-  const handleDrawerOpen = () => {  // TODO: when app is more fleshed out see if I get too many unnecessary renders
+  const handleDrawerOpen = () => {
+    // TODO: when app is more fleshed out see if I get too many unnecessary renders
     setOpen(true);
   };
   const handleDrawerClose = () => {
@@ -42,13 +43,15 @@ export default function AppFrame() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppHeader open={open} handleDrawerOpen={handleDrawerOpen} />
-        <AppDrawer open={open} handleDrawerClose={handleDrawerClose} />
-        <MainContent />
-      </div>
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppHeader open={open} handleDrawerOpen={handleDrawerOpen} />
+          <AppDrawer open={open} handleDrawerClose={handleDrawerClose} />
+          <MainContent />
+        </div>
+      </ThemeProvider>
+    </Router>
   );
 }

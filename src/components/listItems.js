@@ -15,7 +15,7 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 export const mainListItems = (
-  <Router>
+  <div>
     <Link to="/" style={{ color: "#deefb7" }}>
       <ListItem button>
         <ListItemIcon>
@@ -24,12 +24,14 @@ export const mainListItems = (
         <ListItemText primary="Search Input" />
       </ListItem>
     </Link>
-    <ListItem button>
-      <ListItemIcon>
-        <MultilineChart style={{ color: "#c08552" }} />
-      </ListItemIcon>
-      <ListItemText primary="Search Stats" />
-    </ListItem>
+    <Link to="/stats" style={{ color: "#deefb7" }}>
+      <ListItem button>
+        <ListItemIcon>
+          <MultilineChart style={{ color: "#c08552" }} />
+        </ListItemIcon>
+        <ListItemText primary="Search Stats" />
+      </ListItem>
+    </Link>
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
@@ -48,7 +50,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Integrations" />
     </ListItem>
-  </Router>
+  </div>
 );
 
 export const secondaryListItems = (

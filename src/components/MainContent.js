@@ -3,6 +3,7 @@ import { reducer } from "../helpers/reducer";
 import InputScreen from "./InputScreen";
 import fetchVideos from "./../helpers/fetcher";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import StatsScreen from "./StatsScreen";
 
 export default function MainContent() {
   //  Holding the state of the checkboxes both as local
@@ -51,10 +52,17 @@ export default function MainContent() {
 
   console.log("MainContent ", state);
   return (
-    <Router>
+    <div>
       <Switch>
         <Route path="/about"></Route>
-        <Route path="/users"></Route>
+        <Route path="/stats">
+          <StatsScreen
+            checked={checked.current}
+            setChecked={setChecked}
+            handleSubmitSearch={handleSubmitSearch}
+            state={state}
+          />
+        </Route>
         <Route path="/">
           <InputScreen
             checked={checked.current}
@@ -64,6 +72,6 @@ export default function MainContent() {
           />
         </Route>
       </Switch>
-    </Router>
+    </div>
   );
 }
