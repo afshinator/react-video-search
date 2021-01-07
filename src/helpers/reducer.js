@@ -57,18 +57,21 @@ export function reducer(state, action) {
     case "youTubePending":
       set('youTube', 'pending', false)
       current.youTube.stats.requestStarted = now;
+      current.youTube.stats.startedTime = new Date().toLocaleTimeString()
       current.searchTotal++
       return newState;
 
     case "bingPending":
       set('bing', 'pending', false)
       current.bing.stats.requestStarted = now;
+      current.bing.stats.startedTime = new Date().toLocaleTimeString()
       current.searchTotal++
       return newState;
 
     case "vimeoPending":
       set('vimeo', 'pending', false)
       current.vimeo.stats.requestStarted = now;
+      current.vimeo.stats.startedTime = new Date().toLocaleTimeString()
       current.searchTotal++
       return newState;
 

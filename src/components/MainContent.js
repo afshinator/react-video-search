@@ -2,6 +2,7 @@ import React from "react";
 import { reducer } from "../helpers/reducer";
 import InputScreen from "./InputScreen";
 import fetchVideos from "./../helpers/fetcher";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function MainContent() {
   //  Holding the state of the checkboxes both as local
@@ -39,20 +40,30 @@ export default function MainContent() {
     if (typeof state.currentSearch === "number") {
       // only kick off api requests if we have no searches have been done yet
       if (state.searches[state.currentSearch].searchTotal === 0) {
-        fetchVideos(state.searches[state.currentSearch].queryString, 
+        fetchVideos(
+          state.searches[state.currentSearch].queryString,
           dispatch,
-          checked.current);
+          checked.current
+        );
       }
     }
   }, [state.searches, state.currentSearch]); // TODO
 
-  console.log("MainContent ", checked.current, state);
+  console.log("MainContent ", state);
   return (
-    <InputScreen
-      checked={checked.current}
-      setChecked={setChecked}
-      handleSubmitSearch={handleSubmitSearch}
-      state={state}
-    />
+    <Router>
+      <Switch>
+        <Route path="/about"></Route>
+        <Route path="/users"></Route>
+        <Route path="/">
+          <InputScreen
+            checked={checked.current}
+            setChecked={setChecked}
+            handleSubmitSearch={handleSubmitSearch}
+            state={state}
+          />
+        </Route>
+      </Switch>
+    </Router>
   );
 }

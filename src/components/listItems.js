@@ -1,29 +1,34 @@
-import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import SearchIcon from '@material-ui/icons/Search';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import React from "react";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import SearchIcon from "@material-ui/icons/Search";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import PeopleIcon from "@material-ui/icons/People";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import LayersIcon from "@material-ui/icons/Layers";
+import MultilineChart from "@material-ui/icons/MultilineChart";
+
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 export const mainListItems = (
-  <div>
+  <Router>
+    <Link to="/" style={{ color: "#deefb7" }}>
+      <ListItem button>
+        <ListItemIcon>
+          <SearchIcon style={{ color: "#c08552" }} />
+        </ListItemIcon>
+        <ListItemText primary="Search Input" />
+      </ListItem>
+    </Link>
     <ListItem button>
       <ListItemIcon>
-        <SearchIcon />
+        <MultilineChart style={{ color: "#c08552" }} />
       </ListItemIcon>
-      <ListItemText primary="Search Input" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
+      <ListItemText primary="Search Stats" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -43,7 +48,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Integrations" />
     </ListItem>
-  </div>
+  </Router>
 );
 
 export const secondaryListItems = (
