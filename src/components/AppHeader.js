@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
+import { useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -43,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
 export default function AppFrame(props) {
   const classes = useStyles();
   const { open, handleDrawerOpen } = props;
+  const location = useLocation();
+  const hdrText = `Video Search - ${location.pathname}`;
 
   return (
     <AppBar
@@ -59,10 +61,14 @@ export default function AppFrame(props) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography component="h1" variant="h6" color="inherit" noWrap
-        style={{flex: 1}}
+        <Typography
+          component="h1"
+          variant="h6"
+          color="inherit"
+          noWrap
+          style={{ flex: 1 }}
         >
-          Video Search
+          {hdrText}
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">

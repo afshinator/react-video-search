@@ -3,20 +3,18 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import DashboardIcon from "@material-ui/icons/Dashboard";
 import SearchIcon from "@material-ui/icons/Search";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 import MultilineChart from "@material-ui/icons/MultilineChart";
 
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const mainListItems = (
   <div>
-    <Link to="/" style={{ color: "#deefb7" }}>
+    <Link to="/" style={{ color: "#f1f2ee", textDecoration: "none" }}>
       <ListItem button>
         <ListItemIcon>
           <SearchIcon style={{ color: "#c08552" }} />
@@ -24,7 +22,7 @@ export const mainListItems = (
         <ListItemText primary="Search Input" />
       </ListItem>
     </Link>
-    <Link to="/stats" style={{ color: "#deefb7" }}>
+    <Link to="/stats" style={{ color: "#f1f2ee", textDecoration: "none" }}>
       <ListItem button>
         <ListItemIcon>
           <MultilineChart style={{ color: "#c08552" }} />
@@ -36,19 +34,19 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <ListItemText primary="YouTube" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Bing" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Vimeo" />
     </ListItem>
   </div>
 );

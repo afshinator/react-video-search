@@ -50,11 +50,12 @@ export default function StatsScreen({
   setChecked,
   handleSubmitSearch,
   state,
+  match
 }) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
   const current = state.searches[state.currentSearch] || null;
-
+console.log("match ", match)
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
