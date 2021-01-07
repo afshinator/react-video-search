@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function StatsScreen({
+export default function YoutubeScreen({
   checked,
   setChecked,
   handleSubmitSearch,

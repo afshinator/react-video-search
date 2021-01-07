@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: "120px",
+    height: "135px",
     width: '115px',
     padding: "10px",
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     transition: 'all .5s',
   },
   offset: {
-    marginTop: "-20px",
+    marginTop: "-5px",
   },
   grayscale: {
     filter: "grayscale(100%)",

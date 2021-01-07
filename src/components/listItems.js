@@ -8,8 +8,10 @@ import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 import MultilineChart from "@material-ui/icons/MultilineChart";
-
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import youtube from "../assets/youtube.svg";
+import bing from "../assets/bing.svg";
+import vimeo from "../assets/vimeo.svg";
 import { Link } from "react-router-dom";
 
 export const mainListItems = (
@@ -30,21 +32,41 @@ export const mainListItems = (
         <ListItemText primary="Search Stats" />
       </ListItem>
     </Link>
+    <Link to="/stats" style={{ color: "#f1f2ee", textDecoration: "none" }}>
+      <ListItem button>
+        <ListItemIcon>
+          <img
+            src={youtube}
+            alt="youtube"
+            style={{
+              width: "23px",
+            }}
+          />
+        </ListItemIcon>
+        <ListItemText primary="YouTube" />
+      </ListItem>
+    </Link>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="YouTube" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
+        <img
+          src={bing}
+          alt="bing"
+          style={{
+            width: "23px",
+          }}
+        />
       </ListItemIcon>
       <ListItemText primary="Bing" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <LayersIcon />
+        <img
+          src={vimeo}
+          alt="vimeo"
+          style={{
+            width: "23px",
+          }}
+        />
       </ListItemIcon>
       <ListItemText primary="Vimeo" />
     </ListItem>
