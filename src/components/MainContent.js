@@ -4,6 +4,7 @@ import InputScreen from "./InputScreen";
 import fetchVideos from "./../helpers/fetcher";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import StatsScreen from "./StatsScreen";
+import YoutubeScreen from "./YoutubeScreen";
 
 export default function MainContent() {
   //  Holding the state of the checkboxes both as local
@@ -50,7 +51,7 @@ export default function MainContent() {
     }
   }, [state.searches, state.currentSearch]); // TODO
 
-  console.log("MainContent ", state);
+  console.log("MainContent ", current, state);
   return (
     <div>
       <Switch>
@@ -58,10 +59,17 @@ export default function MainContent() {
         <Route path="/stats">
           <StatsScreen
             checked={checked.current}
-            setChecked={setChecked}
-            handleSubmitSearch={handleSubmitSearch}
             state={state}
           />
+        </Route>
+        <Route path="/youtube">
+        { current ? 
+          <YoutubeScreen
+            isChecked={checked.current.checkedA}
+            searchTerm={current.queryString}
+            data={current.youTube}
+          />
+          : null }
         </Route>
         <Route path="/">
           <InputScreen

@@ -32,7 +32,7 @@ export const mainListItems = (
         <ListItemText primary="Search Stats" />
       </ListItem>
     </Link>
-    <Link to="/stats" style={{ color: "#f1f2ee", textDecoration: "none" }}>
+    <Link to="/youtube" style={{ color: "#f1f2ee", textDecoration: "none" }}>
       <ListItem button>
         <ListItemIcon>
           <img
@@ -46,30 +46,34 @@ export const mainListItems = (
         <ListItemText primary="YouTube" />
       </ListItem>
     </Link>
-    <ListItem button>
-      <ListItemIcon>
-        <img
-          src={bing}
-          alt="bing"
-          style={{
-            width: "23px",
-          }}
-        />
-      </ListItemIcon>
-      <ListItemText primary="Bing" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <img
-          src={vimeo}
-          alt="vimeo"
-          style={{
-            width: "23px",
-          }}
-        />
-      </ListItemIcon>
-      <ListItemText primary="Vimeo" />
-    </ListItem>
+    <Link to="/bing" style={{ color: "#f1f2ee", textDecoration: "none" }}>
+      <ListItem button>
+        <ListItemIcon>
+          <img
+            src={bing}
+            alt="bing"
+            style={{
+              width: "23px",
+            }}
+          />
+        </ListItemIcon>
+        <ListItemText primary="Bing" />
+      </ListItem>
+    </Link>
+    <Link to="/vimeo" style={{ color: "#f1f2ee", textDecoration: "none" }}>
+      <ListItem button>
+        <ListItemIcon>
+          <img
+            src={vimeo}
+            alt="vimeo"
+            style={{
+              width: "23px",
+            }}
+          />
+        </ListItemIcon>
+        <ListItemText primary="Vimeo" />
+      </ListItem>
+    </Link>
   </div>
 );
 
