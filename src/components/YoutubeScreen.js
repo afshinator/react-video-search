@@ -103,6 +103,7 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
                 <ViewModule fontSize="large" />
               </IconButton>
             </Tooltip>
+            <Divider orientation="vertical" flexItem />
             <Tooltip title="compact layout" aria-label="compact layout">
               <IconButton
                 color={viewType === "compact" ? "secondary" : "primary"}
@@ -113,6 +114,7 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
                 <ViewStream fontSize="large" />
               </IconButton>
             </Tooltip>
+            <Divider orientation="vertical" flexItem />
             <Tooltip title="list layout" aria-label="list layout">
               <IconButton
                 color={viewType === "list" ? "secondary" : "primary"}
@@ -124,6 +126,7 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
               </IconButton>
             </Tooltip>
           </div>
+
           <div className={classes.col}>
             <FormGroup>
               <FormControlLabel

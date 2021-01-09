@@ -1,21 +1,17 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-
 import Box from "@material-ui/core/Box";
-
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import Title from "./Title";
 import Typography from "@material-ui/core/Typography";
-import Chart from "./Chart";
-import Deposits from "./Deposits";
-import Orders from "./Orders";
 import SearchInput from "./SearchInput";
 import ProviderCheckboxes from "./ProviderCheckboxes";
 import Divider from "@material-ui/core/Divider";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -44,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
     height: 60,
     // padding: 5,
   },
+  para: {
+    marginTop: "4",
+    marginBottom: "4",
+    fontSize: "12",
+  },
 }));
 
 export default function InputScreen({
@@ -55,7 +56,14 @@ export default function InputScreen({
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
   const current = state.searches[state.currentSearch] || null;
-  console.log(current);
+  const youTubeSearchRefinements =
+    current && current.youTube && current.youTube.data
+      ? current.youTube.data.items.filter(
+          (vid) => vid.type === "search-refinements"
+        )[0]
+      : null;
+  console.log(current, youTubeSearchRefinements);
+
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
@@ -75,14 +83,16 @@ export default function InputScreen({
           </Grid>
           {current && current.queryString ? (
             <>
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={4} lg={4}>
                 <Paper className={fixedHeightPaper}>
                   {current.youTube && current.youTube.stats.requestEnded ? (
                     <>
-                      <strong>YouTube</strong>
+                      <Title>YouTube</Title>
                       <Divider />
-                      <p>Started {current.youTube.stats.startedTime}</p>
-                      <p>
+                      <p className={classes.para}>
+                        Started {current.youTube.stats.startedTime}
+                      </p>
+                      <p  className={classes.para}>
                         Results in{" "}
                         {Math.trunc(
                           current.youTube.stats.requestEnded -
@@ -90,7 +100,7 @@ export default function InputScreen({
                         )}{" "}
                         ms
                       </p>
-                      <p>
+                      <p className={classes.para}>
                         Results: {current.youTube.data.items.length} of{" "}
                         {current.youTube.data.results}
                       </p>
@@ -98,14 +108,16 @@ export default function InputScreen({
                   ) : null}
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={4} lg={4}>
                 <Paper className={fixedHeightPaper}>
                   {current.bing && current.bing.stats.requestEnded ? (
                     <>
-                      <strong>Bing</strong>
+                      <Title>Bing</Title>
                       <Divider />
-                      <p>Started {current.bing.stats.startedTime}</p>
-                      <p>
+                      <p className={classes.para}>
+                        Started {current.bing.stats.startedTime}
+                      </p>
+                      <p className={classes.para}>
                         Results in{" "}
                         {Math.trunc(
                           current.bing.stats.requestEnded -
@@ -113,7 +125,7 @@ export default function InputScreen({
                         )}{" "}
                         ms
                       </p>
-                      <p>
+                      <p className={classes.para}>
                         Results:{current.bing.data.value.length} of{" "}
                         {current.bing.data.totalEstimatedMatches}
                       </p>
@@ -121,14 +133,16 @@ export default function InputScreen({
                   ) : null}
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={4} lg={4}>
                 <Paper className={fixedHeightPaper}>
                   {current.vimeo && current.vimeo.stats.requestEnded ? (
                     <>
-                      <strong>Vimeo</strong>
+                      <Title>Vimeo</Title>
                       <Divider />
-                      <p>Started {current.vimeo.stats.startedTime}</p>
-                      <p>
+                      <p className={classes.para}>
+                        Started {current.vimeo.stats.startedTime}
+                      </p>
+                      <p className={classes.para}>
                         Results in{" "}
                         {Math.trunc(
                           current.vimeo.stats.requestEnded -
@@ -136,7 +150,9 @@ export default function InputScreen({
                         )}{" "}
                         ms
                       </p>
-                      <p>Result count: {current.vimeo.data.data.length} of {current.vimeo.data.total}
+                      <p className={classes.para}>
+                        Result count: {current.vimeo.data.data.length} of{" "}
+                        {current.vimeo.data.total}
                       </p>
                     </>
                   ) : null}
@@ -144,11 +160,16 @@ export default function InputScreen({
               </Grid>
             </>
           ) : null}
-          {/* <Grid item xs={12}>
+          <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Orders state={state}/>
+              <Title>YouTube Search Refinement Suggestions</Title>
+              {youTubeSearchRefinements
+                ? youTubeSearchRefinements.entrys.map((q, i) => {
+                    return <Button key={q.q}  color="primary">{q.q}</Button>;
+                  })
+                : null}
             </Paper>
-          </Grid> */}
+          </Grid>
         </Grid>
         <Box pt={4}></Box>
       </Container>
