@@ -15,7 +15,7 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import SearchInput from "./SearchInput";
 import ProviderCheckboxes from "./ProviderCheckboxes";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -90,6 +90,10 @@ export default function InputScreen({
                         )}{" "}
                         ms
                       </p>
+                      <p>
+                        Results: {current.youTube.data.items.length} of{" "}
+                        {current.youTube.data.results}
+                      </p>
                     </>
                   ) : null}
                 </Paper>
@@ -99,6 +103,7 @@ export default function InputScreen({
                   {current.bing && current.bing.stats.requestEnded ? (
                     <>
                       <strong>Bing</strong>
+                      <Divider />
                       <p>Started {current.bing.stats.startedTime}</p>
                       <p>
                         Results in{" "}
@@ -107,6 +112,10 @@ export default function InputScreen({
                             current.bing.stats.requestStarted
                         )}{" "}
                         ms
+                      </p>
+                      <p>
+                        Results:{current.bing.data.value.length} of{" "}
+                        {current.bing.data.totalEstimatedMatches}
                       </p>
                     </>
                   ) : null}
@@ -117,6 +126,7 @@ export default function InputScreen({
                   {current.vimeo && current.vimeo.stats.requestEnded ? (
                     <>
                       <strong>Vimeo</strong>
+                      <Divider />
                       <p>Started {current.vimeo.stats.startedTime}</p>
                       <p>
                         Results in{" "}
@@ -125,6 +135,8 @@ export default function InputScreen({
                             current.vimeo.stats.requestStarted
                         )}{" "}
                         ms
+                      </p>
+                      <p>Result count: {current.vimeo.data.data.length} of {current.vimeo.data.total}
                       </p>
                     </>
                   ) : null}

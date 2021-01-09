@@ -73,12 +73,15 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
   const layoutCol = clsx(classes.row, classes.col);
 
   if (!isChecked) return null;
-  console.log("in youtube screen ", viewType);
-  let videoList = data.data.items.filter((item) => item.type === "video");
+
+  let videoList = data.data.items.filter(
+    (item) => item.type === "video" || item.type === "movie"
+  );
   if (sortByDate) {
     // videoList.sort(function(a,b) {
     // })
   }
+  console.log("in youtube screen ", videoList);
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
@@ -86,7 +89,7 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
         <div className={titleRow}>
           <div className={classes.col}>
             <Typography gutterBottom className={classes.title} component="h3">
-              Search for: '{data.data.query}'
+              Results for: '{data.data.query}'
             </Typography>
           </div>
           <div className={layoutCol}>
@@ -138,7 +141,7 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
             </FormGroup>
           </div>
         </div>
-
+        <div classname={classes.row}></div>
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
             return (
