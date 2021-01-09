@@ -51,7 +51,7 @@ export default function MainContent() {
     }
   }, [state.searches, state.currentSearch]); // TODO
 
-  console.log("MainContent ", current, state);
+  // console.log("MainContent ", current, state);
   return (
     <div>
       <Switch>

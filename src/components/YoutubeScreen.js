@@ -19,7 +19,7 @@ import Link from "@material-ui/core/Link";
 import Title from "./Title";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import SRCard from "./SRCard";
+import YoutubeSRCard from "./YoutubeSRCard";
 import { Tooltip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -142,7 +142,7 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
             return (
-              <SRCard
+              <YoutubeSRCard
                 key={vid.id}
                 videoData={vid}
                 queryString={data.data.query}

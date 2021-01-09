@@ -15,6 +15,7 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import SearchInput from "./SearchInput";
 import ProviderCheckboxes from "./ProviderCheckboxes";
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -54,7 +55,7 @@ export default function InputScreen({
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
   const current = state.searches[state.currentSearch] || null;
-
+  console.log(current);
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
@@ -72,11 +73,65 @@ export default function InputScreen({
               current={current}
             />
           </Grid>
-
-          <Grid item xs={12} md={4} lg={3}>
-            <Paper className={fixedHeightPaper}></Paper>
-          </Grid>
-
+          {current && current.queryString ? (
+            <>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  {current.youTube && current.youTube.stats.requestEnded ? (
+                    <>
+                      <strong>YouTube</strong>
+                      <Divider />
+                      <p>Started {current.youTube.stats.startedTime}</p>
+                      <p>
+                        Results in{" "}
+                        {Math.trunc(
+                          current.youTube.stats.requestEnded -
+                            current.youTube.stats.requestStarted
+                        )}{" "}
+                        ms
+                      </p>
+                    </>
+                  ) : null}
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  {current.bing && current.bing.stats.requestEnded ? (
+                    <>
+                      <strong>Bing</strong>
+                      <p>Started {current.bing.stats.startedTime}</p>
+                      <p>
+                        Results in{" "}
+                        {Math.trunc(
+                          current.bing.stats.requestEnded -
+                            current.bing.stats.requestStarted
+                        )}{" "}
+                        ms
+                      </p>
+                    </>
+                  ) : null}
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  {current.vimeo && current.vimeo.stats.requestEnded ? (
+                    <>
+                      <strong>Vimeo</strong>
+                      <p>Started {current.vimeo.stats.startedTime}</p>
+                      <p>
+                        Results in{" "}
+                        {Math.trunc(
+                          current.vimeo.stats.requestEnded -
+                            current.vimeo.stats.requestStarted
+                        )}{" "}
+                        ms
+                      </p>
+                    </>
+                  ) : null}
+                </Paper>
+              </Grid>
+            </>
+          ) : null}
           {/* <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Orders state={state}/>
