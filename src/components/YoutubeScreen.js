@@ -12,17 +12,13 @@ import ViewModule from "@material-ui/icons/ViewModule";
 import ViewStream from "@material-ui/icons/ViewStream";
 import ViewList from "@material-ui/icons/ViewList";
 import QueryBuilder from "@material-ui/icons/QueryBuilder";
-import Switch from '@material-ui/core/Switch';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from "@material-ui/core/Switch";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Link from "@material-ui/core/Link";
 import Title from "./Title";
 import Typography from "@material-ui/core/Typography";
-import Chart from "./Chart";
-import Deposits from "./Deposits";
-import Orders from "./Orders";
-import SearchInput from "./SearchInput";
-import ProviderCheckboxes from "./ProviderCheckboxes";
+import IconButton from "@material-ui/core/IconButton";
 import SRCard from "./SRCard";
 import { Tooltip } from "@material-ui/core";
 
@@ -72,15 +68,14 @@ const useStyles = makeStyles((theme) => ({
 export default function YoutubeScreen({ isChecked, searchTerm, data }) {
   const classes = useStyles();
   const [viewType, setViewType] = React.useState("default");
-  const [sortByDate, setSortByDate] = React.useState(false)
-  const fixedHeightPaper = clsx(classes.paper, classes.height240);
+  const [sortByDate, setSortByDate] = React.useState(false);
   const titleRow = clsx(classes.row, classes.titleCol);
   const layoutCol = clsx(classes.row, classes.col);
 
   if (!isChecked) return null;
-  console.log("in youtube screen ", data);
+  console.log("in youtube screen ", viewType);
   let videoList = data.data.items.filter((item) => item.type === "video");
-  if ( sortByDate) {
+  if (sortByDate) {
     // videoList.sort(function(a,b) {
     // })
   }
@@ -96,13 +91,34 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
           </div>
           <div className={layoutCol}>
             <Tooltip title="normal layout" aria-label="normal layout">
-              <ViewModule fontSize="large" color="primary" />
+              <IconButton
+                color={viewType === "default" ? "secondary" : "primary"}
+                onClick={() => {
+                  setViewType("default");
+                }}
+              >
+                <ViewModule fontSize="large" />
+              </IconButton>
             </Tooltip>
             <Tooltip title="compact layout" aria-label="compact layout">
-              <ViewStream fontSize="large" color="primary" />
+              <IconButton
+                color={viewType === "compact" ? "secondary" : "primary"}
+                onClick={() => {
+                  setViewType("compact");
+                }}
+              >
+                <ViewStream fontSize="large" />
+              </IconButton>
             </Tooltip>
             <Tooltip title="list layout" aria-label="list layout">
-              <ViewList fontSize="large" color="primary" />
+              <IconButton
+                color={viewType === "list" ? "secondary" : "primary"}
+                onClick={() => {
+                  setViewType("list");
+                }}
+              >
+                <ViewList fontSize="large" color="primary" />
+              </IconButton>
             </Tooltip>
           </div>
           <div className={classes.col}>
@@ -112,7 +128,9 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
                   <Switch
                     size="small"
                     checked={sortByDate}
-                    onChange={()=>{setSortByDate(!sortByDate)} }
+                    onChange={() => {
+                      setSortByDate(!sortByDate);
+                    }}
                   />
                 }
                 label="Order by Date"
@@ -123,7 +141,14 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
 
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
-            return <SRCard videoData={vid} queryString={data.data.query} />;
+            return (
+              <SRCard
+                key={vid.id}
+                videoData={vid}
+                queryString={data.data.query}
+                viewType={viewType}
+              />
+            );
           })}
         </Grid>
         <Box pt={4}></Box>

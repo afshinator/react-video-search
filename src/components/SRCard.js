@@ -40,11 +40,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SRCard({ videoData, queryString }) {
+export default function SRCard({ videoData, queryString, viewType }) {
   const classes = useStyles();
   const titleRow = clsx(classes.row, classes.sb);
   const miscRow = clsx(classes.row, classes.mt5);
-
+  console.log(viewType);
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -69,6 +69,7 @@ export default function SRCard({ videoData, queryString }) {
               </Tooltip>
             </div>
           </div>
+
           <Typography
             className={classes.description}
             color="textSecondary"
@@ -76,27 +77,32 @@ export default function SRCard({ videoData, queryString }) {
           >
             {videoData.description}
           </Typography>
-          <div className={miscRow}>
-            <Typography component="p" className={classes.description}>
-              Views: {videoData.views}🔹
-            </Typography>
-            <Typography component="p" className={classes.description}>
-              Length: {videoData.duration}🔹
-            </Typography>
-            <Typography component="p" className={classes.description}>
-              Date uploaded: {videoData.uploaded_at}
-            </Typography>
-          </div>
+
+          {viewType === "default" ? (
+            <div className={miscRow}>
+              <Typography component="p" className={classes.description}>
+                Views: {videoData.views}🔹
+              </Typography>
+              <Typography component="p" className={classes.description}>
+                Length: {videoData.duration}🔹
+              </Typography>
+              <Typography component="p" className={classes.description}>
+                Date uploaded: {videoData.uploaded_at}
+              </Typography>
+            </div>
+          ) : null}
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
+      {viewType === "default" ? (
+        <CardActions>
+          <Button size="small" color="primary">
+            Share
+          </Button>
+          <Button size="small" color="primary">
+            Learn More
+          </Button>
+        </CardActions>
+      ) : null}
     </Card>
   );
 }
