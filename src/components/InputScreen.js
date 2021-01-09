@@ -63,6 +63,12 @@ export default function InputScreen({
         )[0]
       : null;
   console.log(current, youTubeSearchRefinements);
+  const youtubeCount =
+    current && current.youTube && current.youTube.data
+      ? current.youTube.data.items.filter(
+          (vid) => vid.type === "movie" || vid.type === "video"
+        )
+      : 0;
 
   return (
     <main className={classes.content}>
@@ -92,7 +98,7 @@ export default function InputScreen({
                       <p className={classes.para}>
                         Started {current.youTube.stats.startedTime}
                       </p>
-                      <p  className={classes.para}>
+                      <p className={classes.para}>
                         Results in{" "}
                         {Math.trunc(
                           current.youTube.stats.requestEnded -
@@ -101,7 +107,7 @@ export default function InputScreen({
                         ms
                       </p>
                       <p className={classes.para}>
-                        Results: {current.youTube.data.items.length} of{" "}
+                        Results: {youtubeCount.length} of{" "}
                         {current.youTube.data.results}
                       </p>
                     </>
@@ -165,7 +171,11 @@ export default function InputScreen({
               <Title>YouTube Search Refinement Suggestions</Title>
               {youTubeSearchRefinements
                 ? youTubeSearchRefinements.entrys.map((q, i) => {
-                    return <Button key={q.q}  color="primary">{q.q}</Button>;
+                    return (
+                      <Button key={q.q} color="primary">
+                        {q.q}
+                      </Button>
+                    );
                   })
                 : null}
             </Paper>

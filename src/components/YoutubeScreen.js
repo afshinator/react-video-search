@@ -81,7 +81,7 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
     // videoList.sort(function(a,b) {
     // })
   }
-  console.log("in youtube screen ", videoList);
+
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
@@ -144,12 +144,12 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
             </FormGroup>
           </div>
         </div>
-        <div classname={classes.row}></div>
+        <div className={classes.row}></div>
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
             return (
               <YoutubeSRCard
-                key={vid.id}
+                key={vid.id || vid.videoId}
                 videoData={vid}
                 queryString={data.data.query}
                 viewType={viewType}

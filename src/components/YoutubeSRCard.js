@@ -44,7 +44,7 @@ export default function YoutubeSRCard({ videoData, queryString, viewType }) {
   const classes = useStyles();
   const titleRow = clsx(classes.row, classes.sb);
   const miscRow = clsx(classes.row, classes.mt5);
-  console.log(viewType);
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
