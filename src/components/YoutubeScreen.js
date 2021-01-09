@@ -11,6 +11,10 @@ import Divider from "@material-ui/core/Divider";
 import ViewModule from "@material-ui/icons/ViewModule";
 import ViewStream from "@material-ui/icons/ViewStream";
 import ViewList from "@material-ui/icons/ViewList";
+import QueryBuilder from "@material-ui/icons/QueryBuilder";
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Link from "@material-ui/core/Link";
 import Title from "./Title";
 import Typography from "@material-ui/core/Typography";
@@ -27,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     height: "100vh",
-    overflow: "auto",
+    // overflow: "auto",
   },
   container: {
     paddingTop: theme.spacing(2),
@@ -49,41 +53,77 @@ const useStyles = makeStyles((theme) => ({
     height: 60,
     // padding: 5,
   },
-  optionsBox: {
+  row: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
-    height: "60px",
+    flexWrap: "wrap",
+    alignItems: "center",
+    // justifyContent: "space-around",
+  },
+  titleCol: {
+    // minWidth: '100px',
+    marginBottom: "40px",
+  },
+  col: {
+    flex: 1,
   },
 }));
 
 export default function YoutubeScreen({ isChecked, searchTerm, data }) {
   const classes = useStyles();
   const [viewType, setViewType] = React.useState("default");
+  const [sortByDate, setSortByDate] = React.useState(false)
   const fixedHeightPaper = clsx(classes.paper, classes.height240);
+  const titleRow = clsx(classes.row, classes.titleCol);
+  const layoutCol = clsx(classes.row, classes.col);
 
   if (!isChecked) return null;
   console.log("in youtube screen ", data);
-  const videoList = data.data.items.filter((item) => item.type === "video");
-
+  let videoList = data.data.items.filter((item) => item.type === "video");
+  if ( sortByDate) {
+    // videoList.sort(function(a,b) {
+    // })
+  }
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.container}>
-        <div className={classes.optionsBox}>
-          <Tooltip title="normal layout" aria-label="normal layout">
-            <ViewModule fontSize="large" />
-          </Tooltip>
-          <Tooltip title="compact layout" aria-label="compact layout">
-            <ViewStream fontSize="large" />
-          </Tooltip>
-          <Tooltip title="list layout" aria-label="list layout">
-            <ViewList fontSize="large" />
-          </Tooltip>
+        <div className={titleRow}>
+          <div className={classes.col}>
+            <Typography gutterBottom className={classes.title} component="h3">
+              Search for: '{data.data.query}'
+            </Typography>
+          </div>
+          <div className={layoutCol}>
+            <Tooltip title="normal layout" aria-label="normal layout">
+              <ViewModule fontSize="large" color="primary" />
+            </Tooltip>
+            <Tooltip title="compact layout" aria-label="compact layout">
+              <ViewStream fontSize="large" color="primary" />
+            </Tooltip>
+            <Tooltip title="list layout" aria-label="list layout">
+              <ViewList fontSize="large" color="primary" />
+            </Tooltip>
+          </div>
+          <div className={classes.col}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    size="small"
+                    checked={sortByDate}
+                    onChange={()=>{setSortByDate(!sortByDate)} }
+                  />
+                }
+                label="Order by Date"
+              />
+            </FormGroup>
+          </div>
         </div>
+
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
-            return <SRCard videoData={vid} />;
+            return <SRCard videoData={vid} queryString={data.data.query} />;
           })}
         </Grid>
         <Box pt={4}></Box>
