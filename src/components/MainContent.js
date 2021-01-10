@@ -43,6 +43,7 @@ export default function MainContent() {
     setOpenSnack(false);
   };
 
+
   const initialState = {
     // for the reducer
     currentSearch: null,
@@ -75,7 +76,14 @@ export default function MainContent() {
         }
       }
     }
-  }, [state.searches, state.currentSearch, allFetchResolved]); // TODO
+  }, [state.searches, state.currentSearch, allFetchResolved]);
+
+  const handleHistoryClick = (i) => {
+    // point to a new search results in the history
+    if (i !== state.currentSearch) {
+      dispatch({ type: "setCurrent", data: i });
+    }
+  };
 
   console.log("MainContent ", state);
   return (
@@ -99,6 +107,7 @@ export default function MainContent() {
             checked={checked.current}
             setChecked={setChecked}
             handleSubmitSearch={handleSubmitSearch}
+            handleHistoryClick={handleHistoryClick}
             state={state}
           />
         </Route>

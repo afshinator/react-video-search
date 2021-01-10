@@ -12,6 +12,7 @@ import SearchInput from "./SearchInput";
 import ProviderCheckboxes from "./ProviderCheckboxes";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
+import { Tooltip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -51,6 +52,7 @@ export default function InputScreen({
   checked,
   setChecked,
   handleSubmitSearch,
+  handleHistoryClick,
   state,
 }) {
   const classes = useStyles();
@@ -184,15 +186,23 @@ export default function InputScreen({
         <Box pt={4}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Title>Previous Searches</Title>
+              <Title>Search History</Title>
+
               {state.searches.length
-                ? state.searches.map((aSearch, i) => {
-                    return (
-                      <Button key={aSearch.queryString} color="primary">
-                        {aSearch.queryString}
-                      </Button>
-                    );
-                  }).reverse()
+                ? state.searches
+                    .map((aSearch, i) => {
+                      return (
+                        <Button
+                          key={aSearch.queryString}
+                          color="primary"
+                          disabled={current.queryString === aSearch.queryString}
+                          onClick={() => handleHistoryClick(i)}
+                        >
+                          {aSearch.queryString}
+                        </Button>
+                      );
+                    })
+                    .reverse()
                 : null}
             </Paper>
           </Grid>
