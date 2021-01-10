@@ -122,7 +122,7 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
                   setViewType("list");
                 }}
               >
-                <ViewList fontSize="large" color="primary" />
+                <ViewList fontSize="large" />
               </IconButton>
             </Tooltip>
           </div>
