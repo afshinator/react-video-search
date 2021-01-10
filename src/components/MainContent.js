@@ -115,7 +115,7 @@ export default function MainContent() {
             <IconButton
               size="small"
               aria-label="close"
-              color="secondary"
+              color="primary"
               onClick={handleCloseSnack}
             >
               <CloseIcon fontSize="small" />
