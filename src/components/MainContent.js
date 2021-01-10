@@ -1,10 +1,14 @@
 import React from "react";
 import { reducer } from "../helpers/reducer";
+import Snackbar from "@material-ui/core/Snackbar";
+import Button from "@material-ui/core/Button";
+import CloseIcon from "@material-ui/icons/Close";
 import InputScreen from "./InputScreen";
 import fetchVideos from "./../helpers/fetcher";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import StatsScreen from "./StatsScreen";
 import YoutubeScreen from "./YoutubeScreen";
+import IconButton from "@material-ui/core/IconButton";
 
 export default function MainContent() {
   //  Holding the state of the checkboxes both as local
@@ -25,17 +29,28 @@ export default function MainContent() {
   // This gets prop-drilled to <SearchInput />
   const handleSubmitSearch = (newSearchString) => {
     console.log("got ", newSearchString);
+    setAllFetched(false)
     dispatch({ type: "setQuery", data: newSearchString });
   };
 
+  //   const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+  const handleCloseSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnack(false);
+  };
+
   const initialState = {
-    inputVal: "",
+    // for the reducer
     currentSearch: null,
     searches: [
       // new searches will be stored here; in the shape of resultsObj
     ],
   };
   const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [allFetchResolved, setAllFetched] = React.useState(false);
+  const [openSnack, setOpenSnack] = React.useState(false);
   const current = state.searches[state.currentSearch] || null;
 
   React.useEffect(() => {
@@ -47,29 +62,35 @@ export default function MainContent() {
           dispatch,
           checked.current
         );
+        return;
+      }
+
+      if (state.searches[state.currentSearch].allResolved) {
+        if (!allFetchResolved) {
+          setAllFetched(true);
+          setOpenSnack(true);
+          return;
+        }
       }
     }
-  }, [state.searches, state.currentSearch]); // TODO
+  }, [state.searches, state.currentSearch, allFetchResolved]); // TODO
 
-  // console.log("MainContent ", current, state);
+  console.log("MainContent ", state);
   return (
     <div>
       <Switch>
         <Route path="/about"></Route>
         <Route path="/stats">
-          <StatsScreen
-            checked={checked.current}
-            state={state}
-          />
+          <StatsScreen checked={checked.current} state={state} />
         </Route>
         <Route path="/youtube">
-        { current ? 
-          <YoutubeScreen
-            isChecked={checked.current.checkedA}
-            searchTerm={current.queryString}
-            data={current.youTube}
-          />
-          : null }
+          {current ? (
+            <YoutubeScreen
+              isChecked={checked.current.checkedA}
+              searchTerm={current.queryString}
+              data={current.youTube}
+            />
+          ) : null}
         </Route>
         <Route path="/">
           <InputScreen
@@ -80,6 +101,28 @@ export default function MainContent() {
           />
         </Route>
       </Switch>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={openSnack}
+        autoHideDuration={3000}
+        onClose={handleCloseSnack}
+        message="Finished fetching all results.✔️"
+        action={
+          <React.Fragment>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="secondary"
+              onClick={handleCloseSnack}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
     </div>
   );
 }

@@ -6,13 +6,41 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import AppDrawer from "./AppDrawer";
 import AppHeader from "./AppHeader";
 import MainContent from "./MainContent";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import cloneDeep from "lodash.clonedeep";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
 }));
+
+const initialState = {
+  current: null,
+  collections: [],
+};
+const collection = {
+  title: "",
+  listOfVideos: [],
+};
+
+function myListsReducer(state, action) {
+  const newState = cloneDeep(state);
+  switch (action.type) {
+    // hydrate from localstorage
+    // persist to localStorage
+
+    // create a new collection
+
+    // add to collection
+    // remove from collection
+
+    // set a current collection
+
+    
+
+  }
+}
 
 export default function AppFrame() {
   const classes = useStyles();
@@ -43,7 +71,7 @@ export default function AppFrame() {
           //     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
           //   },
           // },
-        },        
+        },
       }),
     [prefersDarkMode]
   );
@@ -54,6 +82,11 @@ export default function AppFrame() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const [myLists, myListsDispatch] = React.useReducer(
+    myListsReducer,
+    initialState
+  );
 
   return (
     <Router>

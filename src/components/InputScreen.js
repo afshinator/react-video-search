@@ -67,7 +67,7 @@ export default function InputScreen({
     current && current.youTube && current.youTube.data
       ? current.youTube.data.items.filter(
           (vid) => vid.type === "movie" || vid.type === "video"
-        )
+        ).length
       : 0;
 
   return (
@@ -107,7 +107,7 @@ export default function InputScreen({
                         ms
                       </p>
                       <p className={classes.para}>
-                        Results: {youtubeCount.length} of{" "}
+                        Results: {youtubeCount} of{" "}
                         {current.youTube.data.results}
                       </p>
                     </>
