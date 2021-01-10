@@ -62,7 +62,7 @@ export default function InputScreen({
           (vid) => vid.type === "search-refinements"
         )[0]
       : null;
-  console.log(current, youTubeSearchRefinements);
+  console.log("inputscreen ", state);
   const youtubeCount =
     current && current.youTube && current.youTube.data
       ? current.youTube.data.items.filter(
@@ -166,7 +166,7 @@ export default function InputScreen({
               </Grid>
             </>
           ) : null}
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Title>YouTube Search Refinement Suggestions</Title>
               {youTubeSearchRefinements
@@ -179,9 +179,24 @@ export default function InputScreen({
                   })
                 : null}
             </Paper>
-          </Grid>
+          </Grid> */}
         </Grid>
-        <Box pt={4}></Box>
+        <Box pt={4}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Title>Previous Searches</Title>
+              {state.searches.length
+                ? state.searches.map((aSearch, i) => {
+                    return (
+                      <Button key={aSearch.queryString} color="primary">
+                        {aSearch.queryString}
+                      </Button>
+                    );
+                  }).reverse()
+                : null}
+            </Paper>
+          </Grid>
+        </Box>
       </Container>
     </main>
   );

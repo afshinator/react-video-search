@@ -83,7 +83,7 @@ export default function AppFrame() {
     setOpen(false);
   };
 
-  const [myLists, myListsDispatch] = React.useReducer(
+  const [myVideoLists, myListsDispatch] = React.useReducer(
     myListsReducer,
     initialState
   );

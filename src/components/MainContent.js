@@ -10,6 +10,8 @@ import StatsScreen from "./StatsScreen";
 import YoutubeScreen from "./YoutubeScreen";
 import IconButton from "@material-ui/core/IconButton";
 
+const LOCAL_STORAGE_KEY = "videoSearch";
+
 export default function MainContent() {
   //  Holding the state of the checkboxes both as local
   // state in the component, and as a ref here. Why a ref?
