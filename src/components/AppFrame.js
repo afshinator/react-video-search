@@ -15,6 +15,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const myTheme = function (prefersDarkMode) {
+  return () =>
+    createMuiTheme({
+      palette: {
+        type: prefersDarkMode ? "dark" : "light",
+        primary: {
+          main: "#c08552",
+        },
+        secondary: {
+          main: "#8ac6d0",
+        },
+      },
+      overrides: {
+        // MuiButton: {
+        //   text: {
+        //     background: 'linear-gradient(45deg, #c08552 30%, #FF8E53 90%)',
+        //     borderRadius: 3,
+        //     border: 0,
+        //     color: 'white',
+        //     height: 28,
+        //     padding: '0 30px',
+        //     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        //   },
+        // },
+      },
+    });
+};
+
 const initialState = {
   current: null,
   collections: [],
@@ -26,7 +54,8 @@ const collection = {
 
 function myListsReducer(state, action) {
   const newState = cloneDeep(state);
-  switch (action.type) {
+  switch (
+    action.type
     // hydrate from localstorage
     // persist to localStorage
 
@@ -36,9 +65,7 @@ function myListsReducer(state, action) {
     // remove from collection
 
     // set a current collection
-
-    
-
+  ) {
   }
 }
 
@@ -46,35 +73,12 @@ export default function AppFrame() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        palette: {
-          type: prefersDarkMode ? "dark" : "light",
-          primary: {
-            main: "#c08552",
-          },
-          secondary: {
-            main: "#8ac6d0",
-          },
-        },
-        overrides: {
-          // MuiButton: {
-          //   text: {
-          //     background: 'linear-gradient(45deg, #c08552 30%, #FF8E53 90%)',
-          //     borderRadius: 3,
-          //     border: 0,
-          //     color: 'white',
-          //     height: 28,
-          //     padding: '0 30px',
-          //     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-          //   },
-          // },
-        },
-      }),
-    [prefersDarkMode]
+  const [myVideoLists, myListsDispatch] = React.useReducer(
+    myListsReducer,
+    initialState
   );
+  const theme = React.useMemo(myTheme(prefersDarkMode), [prefersDarkMode, myTheme]);
+
   const handleDrawerOpen = () => {
     // TODO: when app is more fleshed out see if I get too many unnecessary renders
     setOpen(true);
@@ -83,11 +87,6 @@ export default function AppFrame() {
     setOpen(false);
   };
 
-  const [myVideoLists, myListsDispatch] = React.useReducer(
-    myListsReducer,
-    initialState
-  );
-
   return (
     <Router>
       <ThemeProvider theme={theme}>
@@ -95,7 +94,7 @@ export default function AppFrame() {
           <CssBaseline />
           <AppHeader open={open} handleDrawerOpen={handleDrawerOpen} />
           <AppDrawer open={open} handleDrawerClose={handleDrawerClose} />
-          <MainContent />
+          <MainContent myVideoLists={myVideoLists} myListsDispatch={myListsDispatch}/>
         </div>
       </ThemeProvider>
     </Router>
