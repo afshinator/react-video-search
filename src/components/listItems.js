@@ -4,11 +4,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import SearchIcon from "@material-ui/icons/Search";
-import PeopleIcon from "@material-ui/icons/People";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import LayersIcon from "@material-ui/icons/Layers";
 import MultilineChart from "@material-ui/icons/MultilineChart";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+
 import youtube from "../assets/youtube.svg";
 import bing from "../assets/bing.svg";
 import vimeo from "../assets/vimeo.svg";
@@ -79,7 +77,15 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
+    <ListSubheader inset style={{ color: '#8ac6d0'}}>Current collection</ListSubheader>
+    <ListItem button>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Current search" />
+    </ListItem>
+
+    <ListSubheader inset style={{marginTop: '25px', color: '#8ac6d0'}}>Saved collections</ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
