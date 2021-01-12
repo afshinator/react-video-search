@@ -9,6 +9,7 @@ import { Switch, Route } from "react-router-dom";
 import StatsScreen from "./StatsScreen";
 import YoutubeScreen from "./youtube/YoutubeScreen";
 import IconButton from "@material-ui/core/IconButton";
+import CollectionsScreen from "./CollectionsScreen";
 
 const LOCAL_STORAGE_KEY = "videoSearch";
 
@@ -107,6 +108,14 @@ export default function MainContent({ myVideoLists, myListsDispatch }) {
             />
           ) : null}
         </Route>
+
+        <Route path="/collections">
+          <CollectionsScreen
+            myVideoLists={myVideoLists}
+            myListsDispatch={myListsDispatch}
+          />
+        </Route>
+
         <Route path="/">
           <InputScreen
             checked={checked.current}

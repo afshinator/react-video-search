@@ -6,6 +6,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import SearchIcon from "@material-ui/icons/Search";
 import MultilineChart from "@material-ui/icons/MultilineChart";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import PermMediaIcon from "@material-ui/icons/PermMedia";
 
 import youtube from "../assets/youtube.svg";
 import bing from "../assets/bing.svg";
@@ -72,12 +73,26 @@ export const mainListItems = (
         <ListItemText primary="Vimeo" />
       </ListItem>
     </Link>
+
+    <Link
+      to="/collections"
+      style={{ color: "#f1f2ee", textDecoration: "none" }}
+    >
+      <ListItem button>
+        <ListItemIcon>
+          <PermMediaIcon style={{ color: "#c08552" }} />
+        </ListItemIcon>
+        <ListItemText primary="Collections" />
+      </ListItem>
+    </Link>
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset style={{ color: '#8ac6d0'}}>Current collection</ListSubheader>
+    <ListSubheader inset style={{ color: "#8ac6d0" }}>
+      Current collection
+    </ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
@@ -85,7 +100,9 @@ export const secondaryListItems = (
       <ListItemText primary="-->" />
     </ListItem>
 
-    <ListSubheader inset style={{marginTop: '25px', color: '#8ac6d0'}}>Saved collections</ListSubheader>
+    <ListSubheader inset style={{ marginTop: "25px", color: "#8ac6d0" }}>
+      Saved collections
+    </ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
