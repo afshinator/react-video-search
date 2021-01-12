@@ -13,14 +13,17 @@ export default function ListView({
   handleCardClick,
   listIndex,
   maxWidth = "360px",
+  disabled
 }) {
   const styles = maxWidth ? { width: '100%', maxWidth }: { width: "100%" }
   return (
-    <List dense style={styles}>
+    <List dense style={styles} >
       <ListItem
         key={videoData.id}
         button
         onClick={() => handleCardClick(listIndex)}
+        disabled={disabled}
+        style={{ opacity: disabled ? 0.2 : 1.0 }}
       >
         <ListItemAvatar>
           <Avatar

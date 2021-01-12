@@ -65,6 +65,7 @@ export default function YoutubeSRCard({
         videoData={videoData}
         handleCardClick={handleCardClick}
         listIndex={listIndex}
+        disabled={disabled}
       />
     );
 

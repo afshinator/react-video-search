@@ -148,7 +148,7 @@ export default function YoutubeScreen({
             </Tooltip>
           </div>
 
-          <div className={classes.col}>
+          {/* <div className={classes.col}>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -163,7 +163,7 @@ export default function YoutubeScreen({
                 label="Order by Date"
               />
             </FormGroup>
-          </div>
+          </div> */}
         </div>
         <Divider />
         <Title>{myVideoLists.collections[0].title} Collection</Title>
