@@ -10,13 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Tooltip } from "@material-ui/core";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Checkbox from "@material-ui/core/Checkbox";
-import Avatar from "@material-ui/core/Avatar";
+import ListView from './youtube/ListView';
 
 const useStyles = makeStyles({
   root: {
@@ -62,7 +56,7 @@ export default function YoutubeSRCard({
   const classes = useStyles();
   const titleRow = clsx(classes.row, classes.sb);
   const miscRow = clsx(classes.row, classes.mt5);
-  console.log("videodat ", videoData);
+  // console.log("videodat ", videoData);
 
   if (viewType === "list")
     return (
@@ -132,31 +126,5 @@ export default function YoutubeSRCard({
         </CardActions>
       ) : null}
     </Card>
-  );
-}
-
-function ListView({ videoData, handleCardClick, listIndex }) {
-  const classes = useStyles();
-  return (
-    <List dense className={classes.listViewRoot}>
-      <ListItem key={videoData.id} button onClick={()=> handleCardClick(listIndex)}>
-        <ListItemAvatar>
-          <Avatar
-            variant="square"
-            alt={videoData.title}
-            src={videoData.thumbnail}
-          />
-        </ListItemAvatar>
-        <ListItemText id={videoData.id} primary={videoData.title} />
-        <ListItemSecondaryAction>
-          <Checkbox
-          // edge="end"
-          // onChange={}
-          // checked={}
-          // inputProps={}
-          />
-        </ListItemSecondaryAction>
-      </ListItem>
-    </List>
   );
 }

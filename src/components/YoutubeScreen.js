@@ -21,6 +21,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import YoutubeSRCard from "./YoutubeSRCard";
 import { Tooltip } from "@material-ui/core";
+import ListView from "./youtube/ListView";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -81,11 +82,13 @@ export default function YoutubeScreen({
   if (!isChecked) return null;
 
   const handleCardClick = (index) => {
-    console.log("in handleCardClick() ", index);
     myListsDispatch({
       type: "addRefToCurrent",
       data: { index, provider: "youTube" },
     });
+  };
+  const handleMyListClick = (index) => {
+    console.log("click in my list on ", index);
   };
 
   let videoList = data.data.items.filter(
@@ -159,7 +162,24 @@ export default function YoutubeScreen({
           </div>
         </div>
         <Divider />
-        <div className={classes.row}></div>
+        <div className={classes.row}>
+          <Title>{myVideoLists.collections[0].title} Collection</Title>
+          {myVideoLists.collections[0].listOfVideos.map((ref, i) => {
+            return (
+              <ListView
+                key={i}
+                videoData={
+                  myVideoLists.latestSearchResults[ref.provider].data.items[
+                    ref.index
+                  ]
+                }
+                handleCardClick={handleMyListClick}
+                listIndex={ref.index}
+              />
+            );
+          })}
+        </div>
+        <Divider />
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
             return (
