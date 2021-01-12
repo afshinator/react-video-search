@@ -16,12 +16,12 @@ import Switch from "@material-ui/core/Switch";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Link from "@material-ui/core/Link";
-import Title from "./Title";
+import Title from "../Title";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import YoutubeSRCard from "./YoutubeSRCard";
 import { Tooltip } from "@material-ui/core";
-import ListView from "./youtube/ListView";
+import ListView from "./ListView";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,

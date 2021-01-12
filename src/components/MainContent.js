@@ -7,7 +7,7 @@ import InputScreen from "./InputScreen";
 import fetchVideos from "./../helpers/fetcher";
 import { Switch, Route } from "react-router-dom";
 import StatsScreen from "./StatsScreen";
-import YoutubeScreen from "./YoutubeScreen";
+import YoutubeScreen from "./youtube/YoutubeScreen";
 import IconButton from "@material-ui/core/IconButton";
 
 const LOCAL_STORAGE_KEY = "videoSearch";
