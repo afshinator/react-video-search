@@ -76,11 +76,16 @@ function myListsReducer(state, action) {
         // its persisted to localStorage?
       }
       return newState;
-    case "removeRefFromCurrent":
+    case "removeFromCurrent":
       if (state.current === 0) {
+        newState.collections[0].listOfVideos = newState.collections[0].listOfVideos.filter(
+          (cur, i) => {
+            return cur.index !== action.data.index;
+          }
+        );
       } else {
       }
-      break;
+      return newState;
     // hydrate from localstorage
     // persist to localStorage
 

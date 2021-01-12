@@ -89,6 +89,10 @@ export default function YoutubeScreen({
   };
   const handleMyListClick = (index) => {
     console.log("click in my list on ", index);
+    myListsDispatch({
+      type: "removeFromCurrent",
+      data: { index }
+    })
   };
 
   let videoList = data.data.items.filter(
@@ -162,8 +166,8 @@ export default function YoutubeScreen({
           </div>
         </div>
         <Divider />
+        <Title>{myVideoLists.collections[0].title} Collection</Title>
         <div className={classes.row}>
-          <Title>{myVideoLists.collections[0].title} Collection</Title>
           {myVideoLists.collections[0].listOfVideos.map((ref, i) => {
             return (
               <ListView
@@ -179,7 +183,7 @@ export default function YoutubeScreen({
             );
           })}
         </div>
-        <Divider style={{marginBottom: '35px'}}/>
+        <Divider style={{ marginBottom: "35px" }} />
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
             return (
@@ -190,10 +194,13 @@ export default function YoutubeScreen({
                 queryString={data.data.query}
                 viewType={viewType}
                 handleCardClick={handleCardClick}
-                disabled={myVideoLists.collections[0].listOfVideos.reduce((acc, c)=>{
-                  console.log('= = = = == ', c, acc)
-                  return c.index === i || acc
-                }, false) }
+                disabled={myVideoLists.collections[0].listOfVideos.reduce(
+                  (acc, c) => {
+                    console.log("= = = = == ", c, acc);
+                    return c.index === i || acc;
+                  },
+                  false
+                )}
               />
             );
           })}
