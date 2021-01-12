@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Tooltip } from "@material-ui/core";
 
-import ListView from './youtube/ListView';
+import ListView from "./youtube/ListView";
 
 const useStyles = makeStyles({
   root: {
@@ -52,11 +52,12 @@ export default function YoutubeSRCard({
   queryString,
   viewType,
   handleCardClick,
+  disabled,
 }) {
   const classes = useStyles();
   const titleRow = clsx(classes.row, classes.sb);
   const miscRow = clsx(classes.row, classes.mt5);
-  // console.log("videodat ", videoData);
+  console.log("disabled ", disabled, listIndex);
 
   if (viewType === "list")
     return (
@@ -68,8 +69,15 @@ export default function YoutubeSRCard({
     );
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea onClick={() => handleCardClick(listIndex)}>
+    <Card
+      className={classes.root}
+      button
+      style={{ opacity: disabled ? 0.2 : 1.0 }}
+    >
+      <CardActionArea
+        onClick={() => handleCardClick(listIndex)}
+        disabled={disabled}
+      >
         <CardMedia
           component="img"
           alt={`youtube search result for ${queryString}`}

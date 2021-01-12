@@ -179,7 +179,7 @@ export default function YoutubeScreen({
             );
           })}
         </div>
-        <Divider />
+        <Divider style={{marginBottom: '35px'}}/>
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
             return (
@@ -190,6 +190,10 @@ export default function YoutubeScreen({
                 queryString={data.data.query}
                 viewType={viewType}
                 handleCardClick={handleCardClick}
+                disabled={myVideoLists.collections[0].listOfVideos.reduce((acc, c)=>{
+                  console.log('= = = = == ', c, acc)
+                  return c.index === i || acc
+                }, false) }
               />
             );
           })}
