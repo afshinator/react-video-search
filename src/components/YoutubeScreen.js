@@ -65,7 +65,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function YoutubeScreen({ isChecked, searchTerm, data }) {
+export default function YoutubeScreen({
+  isChecked,
+  searchTerm,
+  data,
+  myVideoLists,
+  myListsDispatch,
+}) {
   const classes = useStyles();
   const [viewType, setViewType] = React.useState("default");
   const [sortByDate, setSortByDate] = React.useState(false);
@@ -73,6 +79,14 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
   const layoutCol = clsx(classes.row, classes.col);
 
   if (!isChecked) return null;
+
+  const handleCardClick = (index) => {
+    console.log("in handleCardClick() ", index);
+    myListsDispatch({
+      type: "addRefToCurrent",
+      data: { index, provider: "youTube" },
+    });
+  };
 
   let videoList = data.data.items.filter(
     (item) => item.type === "video" || item.type === "movie"
@@ -144,15 +158,18 @@ export default function YoutubeScreen({ isChecked, searchTerm, data }) {
             </FormGroup>
           </div>
         </div>
+        <Divider />
         <div className={classes.row}></div>
         <Grid container spacing={3}>
           {videoList.map((vid, i) => {
             return (
               <YoutubeSRCard
                 key={vid.id || vid.videoId}
+                listIndex={i}
                 videoData={vid}
                 queryString={data.data.query}
                 viewType={viewType}
+                handleCardClick={handleCardClick}
               />
             );
           })}

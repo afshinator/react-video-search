@@ -43,19 +43,39 @@ const myTheme = function (prefersDarkMode) {
     });
 };
 
-const initialState = {
-  current: null,
-  collections: [],
-};
-const collection = {
-  title: "",
+const defaultCollection = {
+  title: "Default",
   listOfVideos: [],
 };
+const initialState = {
+  latestSearchResults: null,
+  current: 0,
+  collections: [defaultCollection],
+};
+
 
 function myListsReducer(state, action) {
   const newState = cloneDeep(state);
-  switch (
-    action.type
+  switch (action.type) {
+    case 'setLatestSearchResults':
+      newState.latestSearchResults = cloneDeep(action.data)
+      console.log('************************latest ', newState)
+      return newState;
+      
+    case 'addRefToCurrent': // add to current collection
+      if ( state.current === 0 ) {
+        newState.collections[0].listOfVideos.push(action.data)
+      } else {
+        // Must add a copy, or will it be copied when
+        // its persisted to localStorage?
+      }
+      return newState;
+    case 'removeRefFromCurrent': 
+      if ( state.current === 0 ) {
+
+      } else {
+        
+      }
     // hydrate from localstorage
     // persist to localStorage
 
@@ -65,7 +85,10 @@ function myListsReducer(state, action) {
     // remove from collection
 
     // set a current collection
-  ) {
+    default:
+      throw new Error(
+        "Unknown reducer action"
+      );
   }
 }
 

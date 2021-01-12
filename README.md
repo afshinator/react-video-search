@@ -48,3 +48,6 @@ https://github.com/recharts/recharts/issues/2360
 
 * I added a lot of packages thoughtlessly to dependencies insted of devDependencies.  Fix later.
 
+* Currently adding onClick() instead of some generic onPress().  Have to look into that.
+
+

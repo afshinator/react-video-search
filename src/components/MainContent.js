@@ -12,7 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 const LOCAL_STORAGE_KEY = "videoSearch";
 
-export default function MainContent({myVideoLists, myListsDispatch}) {
+export default function MainContent({ myVideoLists, myListsDispatch }) {
   //  Holding the state of the checkboxes both as local
   // state in the component, and as a ref here. Why a ref?
   // Because I dont want to re-render this component
@@ -31,7 +31,7 @@ export default function MainContent({myVideoLists, myListsDispatch}) {
   // This gets prop-drilled to <SearchInput />
   const handleSubmitSearch = (newSearchString) => {
     console.log("got ", newSearchString);
-    setAllFetched(false)
+    setAllFetched(false);
     dispatch({ type: "setQuery", data: newSearchString });
   };
 
@@ -42,7 +42,6 @@ export default function MainContent({myVideoLists, myListsDispatch}) {
     }
     setOpenSnack(false);
   };
-
 
   const initialState = {
     // for the reducer
@@ -71,12 +70,16 @@ export default function MainContent({myVideoLists, myListsDispatch}) {
       if (state.searches[state.currentSearch].allResolved) {
         if (!allFetchResolved) {
           setAllFetched(true);
+          myListsDispatch({
+            type: "setLatestSearchResults",
+            data: state.searches[state.currentSearch],
+          });
           setOpenSnack(true);
           return;
         }
       }
     }
-  }, [state.searches, state.currentSearch, allFetchResolved]);
+  }, [state.searches, state.currentSearch, allFetchResolved, myListsDispatch]);
 
   const handleHistoryClick = (i) => {
     // point to a new search results in the history
@@ -99,6 +102,8 @@ export default function MainContent({myVideoLists, myListsDispatch}) {
               isChecked={checked.current.checkedA}
               searchTerm={current.queryString}
               data={current.youTube}
+              myVideoLists={myVideoLists}
+              myListsDispatch={myListsDispatch}
             />
           ) : null}
         </Route>

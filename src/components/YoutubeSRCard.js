@@ -47,22 +47,35 @@ const useStyles = makeStyles({
     color: "#c08552",
   },
   listViewRoot: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
   },
 });
 
-export default function YoutubeSRCard({ videoData, queryString, viewType }) {
+export default function YoutubeSRCard({
+  videoData,
+  listIndex,
+  queryString,
+  viewType,
+  handleCardClick,
+}) {
   const classes = useStyles();
   const titleRow = clsx(classes.row, classes.sb);
   const miscRow = clsx(classes.row, classes.mt5);
   console.log("videodat ", videoData);
 
-  if (viewType === "list") return <ListView videoData={videoData} />;
+  if (viewType === "list")
+    return (
+      <ListView
+        videoData={videoData}
+        handleCardClick={handleCardClick}
+        listIndex={listIndex}
+      />
+    );
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea onClick={() => handleCardClick(listIndex)}>
         <CardMedia
           component="img"
           alt={`youtube search result for ${queryString}`}
@@ -122,11 +135,11 @@ export default function YoutubeSRCard({ videoData, queryString, viewType }) {
   );
 }
 
-function ListView({ videoData }) {
+function ListView({ videoData, handleCardClick, listIndex }) {
   const classes = useStyles();
   return (
     <List dense className={classes.listViewRoot}>
-      <ListItem key={videoData.id} button>
+      <ListItem key={videoData.id} button onClick={()=> handleCardClick(listIndex)}>
         <ListItemAvatar>
           <Avatar
             variant="square"

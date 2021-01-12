@@ -82,7 +82,7 @@ export const secondaryListItems = (
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Current search" />
+      <ListItemText primary="-->" />
     </ListItem>
 
     <ListSubheader inset style={{marginTop: '25px', color: '#8ac6d0'}}>Saved collections</ListSubheader>
